@@ -1,6 +1,6 @@
 {
     "builds": [
-      { "src": "index.html", "use": "@vercel/static" },
+      { "src": "script.js", "use": "@vercel/static" },
       { "src": "api/send_email.py", "use": "@vercel/python" }
     ],
     "routes": [
