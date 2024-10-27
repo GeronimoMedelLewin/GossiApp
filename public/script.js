@@ -1,22 +1,25 @@
-document.getElementById('emailForm').addEventListener('submit', async (event) => {
+document.getElementById('emailForm').addEventListener('submit', async function (event) {
     event.preventDefault();
-    const to = document.getElementById('to').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
 
+    const formData = new FormData(event.target);
+    const response = await fetch('/api/send-email', {
+        method: 'POST',
+        body: formData,
+    });
+
+    // Verifica si la respuesta es válida
+    if (!response.ok) {
+        const errorText = await response.text(); // Obtiene el texto de error
+        console.error('Error:', errorText);
+        return;
+    }
+
+    // Intenta analizar como JSON
     try {
-        const response = await fetch('/api/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ to, subject, message })
-        });
-
-        const result = await response.json();
-        alert(result.message);
+        const data = await response.json();
+        console.log('Success:', data);
     } catch (error) {
-        alert('Error al enviar el correo');
-        console.error(error);
+        console.error('JSON parse error:', error);
+        console.error('Response text:', await response.text()); // Muestra el texto de la respuesta para depuración
     }
 });
