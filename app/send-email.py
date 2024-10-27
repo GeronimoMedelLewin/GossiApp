@@ -1,5 +1,7 @@
 import requests
 import json
+with open("../contraseñas.json", "r") as contraseñas_jsonFile:
+    contraseñas_jsonData = json.load(contraseñas_jsonFile)
 
 def handler(request):
     # Procesa la solicitud y extrae datos
@@ -9,12 +11,12 @@ def handler(request):
     message = data.get("message")
 
     # Configura y envía la solicitud a Elastic Email
-    API_KEY = "TU_API_KEY"
+    API_KEY = contraseñas_jsonData["elastic email"]
     response = requests.post(
         "https://api.elasticemail.com/v2/email/send",
         data={
             "apikey": API_KEY,
-            "from": "tuemail@dominio.com",
+            "from": "geronimo.medel.lewin@gmail.com",
             "to": to,
             "subject": subject,
             "bodyHtml": f"<p>{message}</p>",
