@@ -1,6 +1,6 @@
 import requests
 import json
-with open("../contraseñas.json", "r") as contraseñas_jsonFile:
+with open("contraseñas.json", "r") as contraseñas_jsonFile:
     contraseñas_jsonData = json.load(contraseñas_jsonFile)
 
 def handler(request):
