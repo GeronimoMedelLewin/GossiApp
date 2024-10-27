@@ -1,0 +1,11 @@
+{
+    "builds": [
+      { "src": "index.html", "use": "@vercel/static" },
+      { "src": "api/send_email.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/api/send-email", "dest": "api/send_email.py" },
+      { "src": "/(.*)", "dest": "/index.html" }
+    ]
+}
+  
